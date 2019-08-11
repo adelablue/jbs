@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/main",
     "pages/scripts/main",
+    "pages/script_detail/main",
     "pages/counter/main"
   ],
   "window": {

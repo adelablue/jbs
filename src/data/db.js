@@ -7,6 +7,8 @@ let scriptList = [
     'maxperson': 9,
     'weekdayprice':268,
     'weekendprice':298,
+    'shop':'ACE实景推理侦探剧 (静安店)',
+    'address': '上海市胶州路941号长久商务中心1103',
     'tags': [
       '欧美','考古','近代'
     ]
@@ -20,6 +22,8 @@ let scriptList = [
     'maxperson': 10,
     'weekdayprice':268,
     'weekendprice':298,
+    'shop':'ACE实景推理侦探剧 (虹口店)',
+    'address': '上海市东江湾路188号D栋400',
     'tags': [
       '玄幻', '中世纪', '古代', '欧美'
     ]
@@ -33,6 +37,8 @@ let scriptList = [
     'maxperson': 8,
     'weekdayprice':268,
     'weekendprice':328,
+    'shop': '小咔·实景演绎侦探剧 (人民广场店)',
+    'address': '上海市普安路10号',
     'tags': [
       '玄幻', '中世纪', '古代', '欧美'
     ]
