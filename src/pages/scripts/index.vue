@@ -26,11 +26,13 @@
 
 <script>
 import {mapState} from 'vuex'
+var QQMapWX = require('qqmap-wx-jssdk')
 
 export default {
   data() {
     return {
-      search: ''
+      search: '',
+      qqmapsdk: {}
     }
   },
   beforeMount() {
@@ -38,13 +40,42 @@ export default {
     console.log(this.$store);
     this.$store.dispatch('getScriptList');
   },
+
+  mounted() {   
+    this.qqmapsdk = new QQMapWX({
+        key: 'HWFBZ-R533F-GNYJ5-NHBFJ-CCYDH-U6BFD'
+    });
+  },
   methods: {
     toDetail (i) {
       console.log('to Detail');
       console.log(this.listTmp[i].name);
-      wx.navigateTo({
-        url: '/pages/script_detail/main?index=' + i
-      })
+
+      this.qqmapsdk.search({
+            keyword: this.listTmp[i].shop,
+            success: function(res) {
+                console.log('success ---------')
+                console.log(res)
+                if (res.count) {
+                    console.log(res.data[0].location);
+                    let location = res.data[0].location;
+
+                wx.navigateTo({
+                  url: '/pages/script_detail/main?index=' + i 
+                  + '&lat=' + location.lat + '&lng=' + location.lng
+                })
+                }
+            }, 
+            fail: function(res) {
+                console.log('fail ---------')
+                console.log(res)
+            }, 
+            complete: function(res) {
+               // console.log('complete ---------')
+               // console.log(res)
+            },
+        });
+
     }
   },
   computed: {

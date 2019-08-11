@@ -2,34 +2,53 @@
     <div>
         script_detail page for
 
-        {{detailObj.name}}
-        {{detailObj.address}}
+        <h4>{{detailObj.name}}</h4>
+       <div class="address">{{detailObj.address}}</div> 
+
+       <map
+  id="citymap"
+  name="citymap"
+  :longitude="lng"
+  :latitude="lat"
+  :markers="markers"
+  scale="12"
+  show-location
+  show-compass
+  enable-rotate
+  style="width:700rpx;height:500rpx;"
+>
+</map>
+
 
     </div>
 </template>
 
 <script>
-
 export default {
     data() {
         return {
             detailObj: {},
-            index: ''
+            index: '',
+            lat: '',
+            lng: '',
+            markers: []
         }
-    }
-    ,
+    },
     beforeMount() {
         console.log('beforeMount -------')
         this.index = this.$mp.query.index
-        console.log('this.index' + this.index)
+        this.lat = this.$mp.query.lat
+        this.lng = this.$mp.query.lng
+        this.detailObj = this.$store.state.listTmp[this.index]
+        this.markers = [{
+            id: 0,
+            latitude: this.lat,
+            longitude: this.lng,
+            width: 50,
+            height: 50
+        }]
     },
     mounted() {
-        console.log('mounted -------')
-        console.log('this.$store.state.listTmp')
-        console.log(this.$store.state.listTmp)
-        console.log('this.$store.state.listTmp[this.index]')
-        console.log(this.$store.state.listTmp[this.index])
-        this.detailObj = this.$store.state.listTmp[this.index]
     },
     computed: {
     },
