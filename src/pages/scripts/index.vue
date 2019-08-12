@@ -3,7 +3,7 @@
   <input class="search-bar" placeholder="输入关键词……" v-model="search"/>
   <section class="script-container">
     <div class="script-item" v-for="(item, i) in listTmp" :key="item" @tap="toDetail(i)">
-      <img src="/static/images/dts.png" mode="aspectFill" />
+      <img :src="'/static/images/' + item.id + '.png'" mode="aspectFill" />
       <h2>{{ item.name }}</h2>
       <ul class="tag-list">
         <li v-for="(tag, j) in item.tags" :key="tag">
@@ -117,7 +117,7 @@ search {
   img {
     margin:5rpx;
     width:320rpx;
-    height:300rpx;
+    height:320rpx;
   }
 
   .person-num, .price{

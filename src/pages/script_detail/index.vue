@@ -11,7 +11,7 @@
   :longitude="lng"
   :latitude="lat"
   :markers="markers"
-  scale="12"
+  scale="13"
   show-location
   show-compass
   enable-rotate
