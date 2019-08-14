@@ -118,6 +118,7 @@ search {
     margin:5rpx;
     width:320rpx;
     height:320rpx;
+    border-radius: 20rpx;
   }
 
   .person-num, .price{
