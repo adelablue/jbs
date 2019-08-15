@@ -3,14 +3,9 @@
 > A Mpvue project
 
 ## Build Setup
-
-``` bash
-# 初始化项目
-vue init mpvue/mpvue-quickstart myproject
-cd myproject
-
-# 安装依赖
-yarn
+1) npm install
+2) npm run dev
+3) 微信开发者工具, 打开生成的dist目录
 
 # 开发时构建
 npm dev
