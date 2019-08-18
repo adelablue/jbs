@@ -1,8 +1,18 @@
 <template>
-<div>
-  <van-search :value="search" placeholder="请输入搜索关键词" style="position:fixed;"/>
-  <section class="script-container">
-    <div class="script-item" v-for="(item, i) in listTmp" :key="item" @tap="toDetail(i)">
+<div class="container-container">
+  <section class="container-searchbar">
+    <van-search :value="search" placeholder="请输入搜索关键词"
+    @change="onChange" 
+    @search="onSearch"
+    @clear="onClear"
+    @cancel="onCancel"
+     use-action-slot
+    >
+    <view slot="action" @click="onClear">取消</view>
+  </van-search>
+  </section>
+  <section class="container-scriptlist">
+    <div class="item-script" v-for="(item, i) in listTmp" :key="item" @tap="toDetail(i)">
       <img :src="'/static/images/' + item.id + '.png'" mode="aspectFill" />
       <h2>{{ item.name }}</h2>
       <ul class="tag-list">
@@ -47,6 +57,37 @@ export default {
     });
   },
   methods: {
+    onSearch(e) {
+      console.log("onSearch ----- ");
+      console.log(e.mp.detail);
+      this.search = e.mp.detail;
+    },
+    onChange(e) {
+      console.log("onChange ----- ");
+      console.log(e.mp.detail);
+    },
+    onClear(e) {
+      console.log("onClear ----- ");
+      console.log(e.mp.detail);
+      this.search = '';
+    },
+    onCancel(e) {
+      console.log("onCancel ----- ");
+      console.log(e.mp.detail);
+    },
+  /*  toDianping() {
+      wx.navigateToMiniProgram({
+        appId: '',
+        path: 'https://g.dianping.com/app/app-page-backroom-on-order/theme.html?shopid=110228849&productid=6867151&_social_u=opjejxo4TMKdpFtLOlHoNg==',
+        extraData: {
+          foo: 'bar'
+        },
+        envVersion: 'develop',
+        success(res) {
+          // 打开成功
+        }
+      })
+    },*/
     toDetail (i) {
       console.log('to Detail');
       console.log(this.listTmp[i].name);
@@ -82,12 +123,17 @@ export default {
     listTmp () {
       console.log('computed listTmp');
       console.log(this.$store.state.list);
-      this.$store.state.listTmp =  this.$store.state.list.filter(item => {
-        if (item.tags.includes(this.search.toLowerCase())
-        || item.name.toLowerCase().includes(this.search.toLowerCase())
-        || item.shop.toLowerCase().includes(this.search.toLowerCase()))
-          return true;
-      });
+      if (this.search == '') {
+        console.log("== ''");
+        this.$store.state.listTmp =this.$store.state.list;
+      } else {
+        this.$store.state.listTmp =  this.$store.state.list.filter(item => {
+          if (item.tags.includes(this.search.toLowerCase())
+          || item.name.toLowerCase().includes(this.search.toLowerCase())
+          || item.shop.toLowerCase().includes(this.search.toLowerCase()))
+            return true;
+        });
+      }
       return this.$store.state.listTmp;
     }
   }
@@ -98,19 +144,22 @@ export default {
 .clearfix {
   clear:both;float:left;width:100%;
 }
-search {
-  width:100%;
-  float:left;
-  clear:both;
+
+.container-searchbar {
+  width: 100%;
+  position: fixed;
+  background-color: #FFF;
 }
-.script-container  {
+
+.container-scriptlist  {
+  padding-top:100rpx;
   display: grid;
   grid-template-columns: auto auto;
 }
 
-.script-item {
+.item-script {
   width:100%;
-  padding:15rpx;
+  padding:12rpx 24rpx;
   height:auto;
   box-sizing: border-box;
   
